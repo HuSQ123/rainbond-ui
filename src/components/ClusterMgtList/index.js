@@ -101,8 +101,8 @@ class Index extends Component {
     };
   }
   clusterNodeAdd = () => {
-    const { rowClusterInfo } = this.props
-    this.props.updateCluster(rowClusterInfo.provider_cluster_id)
+    // const { rowClusterInfo } = this.props
+    this.props.updateCluster()
   }
   menuMouseEnter = () => {
     this.setState({
@@ -264,26 +264,18 @@ class Index extends Component {
     ];
     const formItemLayout = {
       labelCol: {
-        xs: {
-          span: 24
-        },
-        sm: {
-          span: 6
-        }
+        xs: { span: 24 },
+        sm: { span: 6 }
       },
       wrapperCol: {
-        xs: {
-          span: 24
-        },
-        sm: {
-          span: 16
-        }
+        xs: { span: 24 },
+        sm: { span: 16 }
       }
     };
     return (
       <>
         <Card
-          extra={rowClusterInfo && rowClusterInfo.provider == "rke" && <Button icon="form" onClick={this.clusterNodeAdd}>{formatMessage({id:'enterpriseColony.mgt.cluster.editNode'})}</Button>}
+          extra={rowClusterInfo && rowClusterInfo.provider == "rke2" && <Button icon="form" onClick={this.clusterNodeAdd}>{formatMessage({id:'enterpriseColony.mgt.cluster.addNode'})}</Button>}
           style={
             { boxShadow: 'rgba(36, 46, 66, 0.16) 2px 4px 10px 0px' }
           }

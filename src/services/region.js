@@ -306,3 +306,20 @@ export async function fetClusterNodeContainer(param, handleError) {
     handleError
   });
 }
+// 添加集群下的新节点
+export async function AddClusterNode(param, handleError) {
+  return request(`${apiconfig.baseUrl}/enterprise-server/api/v1/enterprises/${param.enterprise_id}/rke2/nodes?cluster_id=${param.clusterID}`, {
+    method: 'put',
+    data: param.data,
+    handleError
+  });
+}
+export async function fetchClusterStatus(param, handleError) {
+  return request(`${apiconfig.baseUrl}/enterprise-server/api/v1/enterprises/${param.enterprise_id}/rke2/node/status`, {
+    method: 'get',
+    params: {
+      cluster_id : param.clusterID
+    },
+    handleError
+  });
+}

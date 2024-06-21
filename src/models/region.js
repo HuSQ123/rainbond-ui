@@ -27,7 +27,9 @@ import {
   fetClusterNodeTaint,
   updataClusterNodeTaint,
   fetDashboardList,
-  fetClusterNodeContainer
+  fetClusterNodeContainer,
+  AddClusterNode,
+  fetchClusterStatus,
 } from '../services/region';
 
 export default {
@@ -234,6 +236,18 @@ export default {
     },
     *fetClusterNodeContainer({ payload, callback, handleError }, { call }) {
       const response = yield call(fetClusterNodeContainer, payload, handleError);
+      if (response && callback) {
+        callback(response);
+      }
+    },
+    *AddClusterNode({ payload, callback, handleError }, { call }) {
+      const response = yield call(AddClusterNode, payload, handleError);
+      if (response && callback) {
+        callback(response);
+      }
+    },
+    *fetchClusterStatus({ payload, callback, handleError }, { call }) {
+      const response = yield call(fetchClusterStatus, payload, handleError);
       if (response && callback) {
         callback(response);
       }

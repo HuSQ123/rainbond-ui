@@ -78,7 +78,6 @@ export default class KubernetesClusterShow extends PureComponent {
       type: 'cloud/deleteKubernetesCluster',
       payload: {
         enterprise_id: eid,
-        providerName: selectProvider,
         clusterID
       },
       callback: () => {

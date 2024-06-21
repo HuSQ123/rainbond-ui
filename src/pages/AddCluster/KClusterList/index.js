@@ -495,6 +495,7 @@ export default class EnterpriseClusters extends PureComponent {
               eid={eid}
               selectProvider={provider}
               taskID={lastTask.taskID}
+              isShowNodeComponent={false}
               clusterID={currentClusterID}
             />
           )}

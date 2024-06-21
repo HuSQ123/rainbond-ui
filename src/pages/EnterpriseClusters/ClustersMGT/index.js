@@ -15,6 +15,7 @@ import DetectionInfo from '../../../components/ClusterMgtInfo';
 import DetectionResources from '../../../components/ClusterMgtResources';
 import RKEClusterUpdate from "../../../components/Cluster/RKEClusterAdd";
 import ShowUpdateClusterDetail from '../../../components/Cluster/ShowUpdateClusterDetail';
+import ClusterMgtAddNode from '../../../components/ClusterMgtAddNode'
 import SVG from '../../../utils/pageHeaderSvg'
 import global from '@/utils/global';
 import styles from "./index.less";
@@ -34,7 +35,8 @@ class Index extends Component {
       installLoading: false,
       isComponents: false,
       showUpdateKubernetes: false,
-      dashboardShow: false
+      dashboardShow: false,
+      isShowAddNodeModal: false,
     }
   }
   componentDidMount() {
@@ -83,6 +85,10 @@ class Index extends Component {
   };
   // 编辑节点信息
   updateCluster = clusterID => {
+    this.setState({
+      isShowAddNodeModal: true,
+    })
+    return
     const {
       match: {
         params: { eid }
@@ -205,6 +211,15 @@ class Index extends Component {
       this.fetClusterNodeList(rowCluster)
     });
   };
+  handleAddNodeClose = (type) => {
+    this.setState({
+      isShowAddNodeModal: false,
+    }, () => {
+      if (Number(type) === 1) {
+        this.loadClusters()
+      }
+    })
+  }
   // 获取 k8s dashboard
   fetDashboardList = (val) => {
     const {
@@ -258,7 +273,8 @@ class Index extends Component {
       clusterID,
       dashboardList,
       dashboardShow,
-      nodeType
+      nodeType,
+      isShowAddNodeModal,
     } = this.state
     return (
       <>
@@ -338,6 +354,12 @@ class Index extends Component {
             task={updateTask}
             selectProvider={"rke"}
             onCancel={this.cancelShowUpdateKubernetes}
+          />
+        )}
+        {isShowAddNodeModal && (
+          <ClusterMgtAddNode
+            rowClusterInfo={rowCluster}
+            onAddNodeClose={this.handleAddNodeClose}
           />
         )}
       </>
